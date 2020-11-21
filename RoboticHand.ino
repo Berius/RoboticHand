@@ -30,7 +30,7 @@ int pulseWidth(int angle){
   int pulse_wide, analog_value;
   pulse_wide = map(angle, 0, 180, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
   analog_value = int(float(pulse_wide) / 1000000 * FREQUENCY * 4096);
-  Serial.println(analog_value);
+ // Serial.println(analog_value);
   return analog_value;
 }
 
@@ -49,10 +49,12 @@ void loop(){
   ringFlexValue = analogRead(ringFlexPin);
   pinkyFlexValue = analogRead(pinkyFlexPin);
   
-  Serial.println(thumbFlexPin);
-  
-  pinkyFlexValue = map(pinkyFlexValue, 750, 900, 100, 30);
-  
+  pinkyFlexValue = map(pinkyFlexValue, 890, 960, 110, 70);
+  ringFlexValue = map(ringFlexValue, 870, 930, 110, 30);
+  middleFlexValue = map(middleFlexValue, 777, 880, 110, 30);
+  indexFlexValue = map(indexFlexValue, 770, 850, 110, 20);
+  thumbFlexValue = map(thumbFlexValue, 747, 802, 110, 90);
+   
   pwm.setPWM(thumbServo, 0, pulseWidth(thumbFlexValue));
   pwm.setPWM(indexServo, 0, pulseWidth(indexFlexValue));
   pwm.setPWM(middleServo, 0, pulseWidth(middleFlexValue));
